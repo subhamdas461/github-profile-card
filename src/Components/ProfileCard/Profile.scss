@@ -1,0 +1,32 @@
+@import "../../App.scss";
+@import "../config";
+.profile {
+    color: #fff;
+    border-radius: 10px;
+    background-color: $primary;
+    width: 600px;
+    min-height: 300px;
+    margin: auto;
+    margin-top: 50px;
+    padding: 20px 10px;
+    min-width: 300px;
+    @media (max-width: 768px) {
+        width: 90%;
+    }
+    img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 7px solid rgb(81, 75, 99);
+    }
+    .name {
+        font: 900 32px sans-serif;
+    }
+    .username {
+        font: 18px sans-serif;
+        cursor: pointer;
+        text-decoration: none;
+        color: $link;
+    }
+}
