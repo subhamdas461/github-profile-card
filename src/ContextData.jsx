@@ -28,6 +28,7 @@ const ContextData = (props) => {
     useEffect(() => {
         if (rate === 0) setError("Rate limit reached! Try again later");
     }, [rate]);
+    console.log(rate, user);
     return (
         <ProfileContext.Provider
             value={{

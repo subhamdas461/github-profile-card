@@ -1,10 +1,16 @@
 .error-wrapper {
     color: #fff;
-    font-weight: 300;
+    font: 400 19px "Comfortaa", sans-serif;
     height: 200px;
     display: grid;
     place-items: center;
     p {
-        color: red;
+        color: rgb(211, 74, 74);
+        display: flex;
+        align-items: flex-end;
+
+        span {
+            margin: 0 10px;
+        }
     }
 }

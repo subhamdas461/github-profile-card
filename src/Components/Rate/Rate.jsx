@@ -11,9 +11,10 @@ const Rate = () => {
     useEffect(() => {
         if (rate !== null) setLoaded(true);
     }, [rate]);
+
     return !loaded ? (
         <div className="load load-rate">
-            <SyncLoader size="7px" color="#fff" speedMultiplier="0.8" />
+            <SyncLoader size="5px" color="#fff" speedMultiplier="1" />
         </div>
     ) : (
         <div className="rate-wrapper">

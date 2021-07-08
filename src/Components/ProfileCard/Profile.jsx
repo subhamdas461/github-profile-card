@@ -4,6 +4,7 @@ import "./Profile.scss";
 import { ScaleLoader } from "react-spinners";
 import { IoLocation } from "react-icons/io5";
 import { BsBuilding } from "react-icons/bs";
+import { MdError } from "react-icons/md";
 import { SiGooglecalendar } from "react-icons/si";
 import Error from "../Error/Error";
 const Profile = () => {
@@ -20,18 +21,35 @@ const Profile = () => {
         location,
         public_repos,
     } = user;
-    if (error) {
-        return (
-            <Error>
-                <p>{error}</p>
-            </Error>
-        );
-    }
+
     const date_opt = {
         year: "numeric",
         month: "short",
         day: "numeric",
     };
+    const convertNum = (num) => {
+        let n = parseInt(num);
+        if (n > 1000) {
+            let ansK = n / 1000;
+            if (n >= 1000000) {
+                let ansM = n / 1000000;
+                return ansM.toFixed(1) + "M";
+            }
+            return ansK.toFixed(1) + "K";
+        }
+
+        return n;
+    };
+    if (error) {
+        return (
+            <Error>
+                <p>
+                    <MdError size="24" />
+                    <span>{error}</span>
+                </p>
+            </Error>
+        );
+    }
     return profileLoad ? (
         <div className="profile load-profile">
             <ScaleLoader color="#fff" />
@@ -49,7 +67,7 @@ const Profile = () => {
                     >
                         @{login}
                     </a>
-                    <p className="bio">{bio}</p>
+                    {bio && <p className="bio">" {bio} "</p>}
                     <div className="first-row">
                         {company && (
                             <p>
@@ -68,7 +86,7 @@ const Profile = () => {
                             <p>
                                 <SiGooglecalendar />
                                 <span>
-                                    Joined{"   "}
+                                    Joined on{" "}
                                     {new Date(created_at).toLocaleDateString(
                                         "en-US",
                                         date_opt
@@ -80,19 +98,19 @@ const Profile = () => {
                     <div className="sec-row">
                         {followers !== null && (
                             <div>
-                                {followers}
+                                {convertNum(followers)}
                                 <p>Followers</p>
                             </div>
                         )}
                         {following !== null && (
                             <div>
-                                {following}
+                                {convertNum(following)}
                                 <p>Following</p>
                             </div>
                         )}
                         {public_repos !== null && (
                             <div>
-                                {public_repos}
+                                {convertNum(public_repos)}
                                 <p>Repositories</p>
                             </div>
                         )}

@@ -14,7 +14,9 @@ const SearchInput = () => {
             if (username.length === 0) {
                 return;
             }
-            setUser([])
+            _btn.current.disabled = true;
+            setUsername("");
+            setUser([]);
             setProfileLoad(true);
             setError(null);
             const userUrl = `https://api.github.com/users/${username}`;
@@ -24,17 +26,21 @@ const SearchInput = () => {
             console.log(res);
             if (res.status > 399) {
                 if (res.status === 404) {
-                    throw Error("User Not found");
+                    throw Error("User Not found!");
                 }
                 if (rate === 0) {
-                    throw Error("Rate limit reached! Try again later");
+                    throw Error("Rate limit reached! Try again later.");
                 }
                 throw Error("Something went wrong!");
+            }
+            if (data) {
+                _btn.current.disabled = false;
             }
             setUsername("");
             setUser(data);
             console.log(data);
         } catch (error) {
+            _btn.current.disabled = false;
             setProfileLoad(false);
             setError(error.message);
             console.log("Error search:", error.message);
@@ -51,7 +57,7 @@ const SearchInput = () => {
                 onChange={(e) => handleName(e)}
                 onKeyDown={(e) => {
                     if (e.code === "Enter") {
-                        _btn.current.click();
+                        getUserData();
                     }
                 }}
             />
