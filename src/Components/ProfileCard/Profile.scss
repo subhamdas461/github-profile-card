@@ -4,7 +4,7 @@
     color: #fff;
     border-radius: 10px;
     background-color: $primary;
-    width: 600px;
+    width: 768px;
     min-height: 300px;
     margin: auto;
     margin-top: 50px;
@@ -14,6 +14,9 @@
         width: 90%;
     }
     img {
+        display: block;
+        margin-left: 50%;
+        transform: translateX(-50%);
         width: 150px;
         height: 150px;
         object-fit: cover;
@@ -21,12 +24,58 @@
         border: 7px solid rgb(81, 75, 99);
     }
     .name {
-        font: 900 32px sans-serif;
+        font: 900 45px "Roboto", sans-serif;
+        margin: 10px 0 0;
     }
     .username {
-        font: 18px sans-serif;
+        display: block;
+        font: 300 14px "Comfortaa", sans-serif;
         cursor: pointer;
         text-decoration: none;
         color: $link;
+        margin: 0 0 10px 0;
     }
+    .bio {
+        font: 22px "Comfortaa", sans-serif;
+        margin: 20px 0;
+    }
+    .first-row {
+        font: 300 16px "Comfortaa", sans-serif;
+        display: flex;
+
+        justify-content: center;
+        align-self: center;
+        margin: 15px 0;
+        p {
+            margin: 0 15px;
+            // background-color: red;
+            min-width: 200px;
+            span {
+                margin: 0 5px;
+            }
+        }
+        @media (max-width: 768px) {
+            display: block;
+            p {
+                margin: 5px 0;
+            }
+        }
+    }
+    .sec-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: rgb(188, 175, 235);
+
+        font: 300 14px "Comfortaa", sans-serif;
+        > * {
+            background-color: rgba(0, 0, 0, 0.219);
+            padding: 12px;
+            margin: 0 8px;
+        }
+    }
+}
+.load-profile {
+    display: grid;
+    place-items: center;
 }

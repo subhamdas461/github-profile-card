@@ -18,7 +18,7 @@ const Rate = () => {
     ) : (
         <div className="rate-wrapper">
             {rate !== null && <h1 className="rate">{rate} / 60</h1>}
-            <p>Request Limit</p>
+            <p>Requests left</p>
         </div>
     );
 };

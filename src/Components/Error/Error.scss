@@ -1,0 +1,10 @@
+.error-wrapper {
+    color: #fff;
+    font-weight: 300;
+    height: 200px;
+    display: grid;
+    place-items: center;
+    p {
+        color: red;
+    }
+}

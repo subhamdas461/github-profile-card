@@ -2,6 +2,10 @@ import React, { useContext } from "react";
 import { ProfileContext } from "../../ContextData";
 import "./Profile.scss";
 import { ScaleLoader } from "react-spinners";
+import { IoLocation } from "react-icons/io5";
+import { BsBuilding } from "react-icons/bs";
+import { SiGooglecalendar } from "react-icons/si";
+import Error from "../Error/Error";
 const Profile = () => {
     const { user, profileLoad, error } = useContext(ProfileContext);
     const {
@@ -13,38 +17,85 @@ const Profile = () => {
         following,
         avatar_url,
         company,
-
+        location,
         public_repos,
     } = user;
     if (error) {
         return (
-            <div>
-                <h1>{error}</h1>
-            </div>
+            <Error>
+                <p>{error}</p>
+            </Error>
         );
     }
+    const date_opt = {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+    };
     return profileLoad ? (
-        <div>
+        <div className="profile load-profile">
             <ScaleLoader color="#fff" />
         </div>
     ) : (
         <>
             {user.login && (
                 <div className="profile">
-                    <img src={avatar_url} alt="img" height="100px" />
-                    <h1 className="name">{name}</h1>
-                    <a href="" target="blank" className="username">
+                    <img src={avatar_url} alt="img" />
+                    {name && <h1 className="name">{name}</h1>}
+                    <a
+                        href={`https://github.com/${login}`}
+                        target="blank"
+                        className="username"
+                    >
                         @{login}
                     </a>
-                    <p>{bio}</p>
+                    <p className="bio">{bio}</p>
                     <div className="first-row">
-                        <p>{company}</p>
-                        <p>Joined {new Date(created_at).toDateString()}</p>
+                        {company && (
+                            <p>
+                                <BsBuilding />
+
+                                <span>{company}</span>
+                            </p>
+                        )}
+                        {location && (
+                            <p>
+                                <IoLocation />
+                                <span>{location}</span>
+                            </p>
+                        )}
+                        {created_at && (
+                            <p>
+                                <SiGooglecalendar />
+                                <span>
+                                    Joined{"   "}
+                                    {new Date(created_at).toLocaleDateString(
+                                        "en-US",
+                                        date_opt
+                                    )}
+                                </span>
+                            </p>
+                        )}
                     </div>
                     <div className="sec-row">
-                        <div>{followers}</div>
-                        <div>{following}</div>
-                        <div>{public_repos}</div>
+                        {followers !== null && (
+                            <div>
+                                {followers}
+                                <p>Followers</p>
+                            </div>
+                        )}
+                        {following !== null && (
+                            <div>
+                                {following}
+                                <p>Following</p>
+                            </div>
+                        )}
+                        {public_repos !== null && (
+                            <div>
+                                {public_repos}
+                                <p>Repositories</p>
+                            </div>
+                        )}
                     </div>
                 </div>
             )}

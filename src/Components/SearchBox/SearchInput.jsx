@@ -14,7 +14,7 @@ const SearchInput = () => {
             if (username.length === 0) {
                 return;
             }
-
+            setUser([])
             setProfileLoad(true);
             setError(null);
             const userUrl = `https://api.github.com/users/${username}`;
