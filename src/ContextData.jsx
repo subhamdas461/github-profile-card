@@ -9,7 +9,6 @@ const ContextData = (props) => {
     const [profileLoad, setProfileLoad] = useState(false);
 
     useEffect(() => {
-        console.log("Useffect running..");
         const rateUrl = `https://api.github.com/rate_limit`;
         const fetchData = async (url) => {
             try {
@@ -17,7 +16,6 @@ const ContextData = (props) => {
                 const data = await res.json();
                 setRate(data.rate.remaining);
             } catch (error) {
-                console.log(error);
                 setRate(null);
             }
         };
@@ -28,7 +26,7 @@ const ContextData = (props) => {
     useEffect(() => {
         if (rate === 0) setError("Rate limit reached! Try again later");
     }, [rate]);
-    console.log(rate, user);
+
     return (
         <ProfileContext.Provider
             value={{

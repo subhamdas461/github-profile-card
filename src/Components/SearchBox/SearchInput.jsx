@@ -23,7 +23,7 @@ const SearchInput = () => {
             const res = await fetch(userUrl);
             const data = await res.json();
             setProfileLoad(false);
-            console.log(res);
+
             if (res.status > 399) {
                 if (res.status === 404) {
                     throw Error("User Not found!");
@@ -38,12 +38,10 @@ const SearchInput = () => {
             }
             setUsername("");
             setUser(data);
-            console.log(data);
         } catch (error) {
             _btn.current.disabled = false;
             setProfileLoad(false);
             setError(error.message);
-            console.log("Error search:", error.message);
         }
     };
     return (
